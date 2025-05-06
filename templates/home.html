@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Churn Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h2 align="center">Customer Churn Prediction Form</h2>
+    <form method="POST" action="/predict">
+        <label for="Age">Age</label>
+        <input type="number" name="Age" step="any" required>
+
+        <label for="Gender">Gender</label>
+        <select name="Gender" required>
+            <option value="">--Select--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="Tenure">Tenure (months)</label>
+        <input type="number" name="Tenure" step="any" required>
+
+        <label for="Usage_Frequency">Usage Frequency</label>
+        <input type="number" name="Usage_Frequency" step="any" required>
+
+        <label for="Support_Calls">Support Calls</label>
+        <input type="number" name="Support_Calls" step="any" required>
+
+        <label for="Payment_Delay">Payment Delay (days)</label>
+        <input type="number" name="Payment_Delay" step="any" required>
+
+        <label for="Subscription_Type">Subscription Type</label>
+        <select name="Subscription_Type" required>
+            <option value="">--Select--</option>
+            <option value="Basic">Basic</option>
+            <option value="Standard">Standard</option>
+            <option value="Premium">Premium</option>
+        </select>
+
+        <label for="Contract_Length">Contract Length</label>
+        <select name="Contract_Length" required>
+            <option value="">--Select--</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Yearly">Yearly</option>
+        </select>
+
+        <label for="Total_Spend">Total Spend</label>
+        <input type="number" name="Total_Spend" step="any" required>
+
+        <label for="Last_Interaction">Last Interaction (days ago)</label>
+        <input type="number" name="Last_Interaction" step="any" required>
+
+        <button type="submit">Predict</button>
+    </form>
+    <h2>
+        the prediction is {{results}}
+    </h2>
+</body>
+</html>

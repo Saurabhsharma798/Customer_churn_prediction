@@ -18,7 +18,6 @@ def main():
     
     X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=11)
 
-    # Final recommended code snippet
     train_data = pd.concat([X_train, y_train], axis=1)
     train_data = train_data.dropna(subset=[y_train.name])
     X_train = train_data.drop(columns=[y_train.name])
@@ -37,6 +36,7 @@ def main():
     save_model(model,model_path)
 
     print(f'model training completed saved at {model_path}')
+
 
 if __name__=='__main__':
     main()
