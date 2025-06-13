@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel,Field
 from typing import Annotated,Literal
-from predict_pipeline import CustomData,PredictPipeline
-import pandas as pd
+from src.predict_pipeline import CustomData,PredictPipeline
+from recommender import get_recommendation
 
 
 app=FastAPI()
@@ -23,21 +23,28 @@ class UserInput(BaseModel):
 
 
 
-
-
-app.get('/')
-def home():
-    return render_template('index.html')
-
-
-app.get('/predict')
-def predict_form():
-    return render_template('home.html')
-
-
-app.post('/predict')
+@app.post('/predict')
 def predict_data(data:UserInput):
     
-    data_df=pd.DataFrame(data)
-    predict_pipeline=PredictPipeline()
-    result=predict_pipeline.predict(data_df)
+    custom_data = CustomData(
+            Age=data.Age,
+            Gender=data.Gender,
+            Tenure=data.Tenure,
+            Usage_Frequency=data.Usage_Frequency,
+            Support_Calls=data.Support_Calls,
+            Payment_Delay=data.Payment_Delay,
+            Subscription_Type=data.Subscription_Type,
+            Contract_Length=data.Contract_Length,
+            Total_Spend=data.Total_Spend,
+            Last_Interaction=data.Last_Interaction
+        )
+    
+    final_data=custom_data.get_data_as_data_frame()
+
+    pipeline=PredictPipeline()
+
+    prediction=pipeline.predict(final_data)
+    recommender=get_recommendation(custom_data,str(prediction))
+
+    return {'prediction':prediction[0],
+            "recommendation":recommender.strip()}
