@@ -64,7 +64,7 @@ elif st.session_state.page == "Prediction":
         }
 
         try:
-            response=requests.post("https://customer-churn-prediction-3jai.onrender.com//predict",json=data)
+            response=requests.post("http://13.61.2.8:8000/predict",json=data)
             result=response.json()
 
             
