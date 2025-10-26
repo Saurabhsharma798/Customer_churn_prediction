@@ -3,9 +3,19 @@ from pydantic import BaseModel,Field
 from typing import Annotated,Literal
 from src.predict_pipeline import CustomData,PredictPipeline
 from recommender import get_recommendation
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app=FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["http://<your-ec2-ip>:8501"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 class UserInput(BaseModel):
