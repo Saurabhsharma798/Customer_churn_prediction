@@ -5,6 +5,9 @@ import os
 load_dotenv()
 api_key=os.getenv('grok_api_key')
 
+if not api_key:
+    print(f"api key not loaded {api_key}")
+
 def get_recommendation(customer_data:dict,prediction_result:str)->str:
     prompt=f"""Customer Details:{customer_data}
     churn prediction:{prediction_result}
