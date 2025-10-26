@@ -19,7 +19,7 @@ def get_recommendation(customer_data:dict,prediction_result:str)->str:
 
 
     body={
-        "model":"llama3-8b-8192",
+        "model":"llama-3.1-8b-instant",
         "messages":[
             {"role":"system","content":"you are an expert in customer retention."},
             {"role":"user","content":prompt}
