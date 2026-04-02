@@ -1,5 +1,8 @@
 import streamlit as st
 import requests
+from dotenv import load_env
+
+load_env()
 
 st.sidebar.title('Navigation')
 if "page" not in st.session_state:
@@ -64,7 +67,7 @@ elif st.session_state.page == "Prediction":
         }
 
         try:
-            response=requests.post("http://13.61.2.8:8000/predict",json=data)
+            response=requests.post(API_URL,json=data)
             result=response.json()
 
             
