@@ -1,8 +1,8 @@
 import streamlit as st
 import requests
-from dotenv import load_env
+import os
 
-load_env()
+API_URL = os.getenv('API_URL')
 
 st.sidebar.title('Navigation')
 if "page" not in st.session_state:
